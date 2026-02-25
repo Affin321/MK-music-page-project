@@ -1,32 +1,230 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #111;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #0f0f0f;
   color: white;
-  text-align: center;
 }
 
-.hero {
-  height: 100vh;
+/* Reusable layout container */
+.container {
+  width: min(1000px, 92%);
+  margin: 0 auto;
+}
+
+/* Top nav */
+.topbar {
+  position: sticky;
+  top: 0;
+  background: rgba(15, 15, 15, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 10;
+}
+
+.nav {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+}
+
+.logo {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.links a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  margin-left: 16px;
+  font-size: 0.95rem;
+}
+
+.links a:hover {
+  color: white;
+}
+
+/* Hero */
+.hero {
+  min-height: 80vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 64px 0;
+}
+
+.hero-inner h1 {
+  font-size: clamp(2.6rem, 6vw, 4rem);
+  margin: 0 0 12px;
+}
+
+.subtitle {
+  margin: 0 auto 24px;
+  max-width: 60ch;
+  color: rgba(255,255,255,0.75);
+  font-size: 1.05rem;
+}
+
+/* Buttons (fixes the “full width white bar” look) */
+.cta-row {
+  display: flex;
+  gap: 12px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
-h1 {
-  font-size: 3rem;
-  margin-bottom: 10px;
+.btn {
+  display: inline-block;
+  padding: 12px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  width: auto;            /* important */
+  max-width: 100%;
 }
 
-p {
-  opacity: 0.7;
+.btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
 }
 
-button {
-  margin-top: 20px;
-  padding: 12px 24px;
-  border: none;
+.btn.primary {
   background: white;
   color: black;
-  cursor: pointer;
+  border: 1px solid white;
+}
+
+.btn.ghost {
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* Sections */
+.section {
+  padding: 72px 0;
+}
+
+.section.alt {
+  background: rgba(255, 255, 255, 0.03);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+h2 {
+  margin: 0 0 18px;
+  font-size: 1.6rem;
+}
+
+.lead {
+  color: rgba(255,255,255,0.78);
+  line-height: 1.7;
+  max-width: 75ch;
+}
+
+/* Cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.card h3 {
+  margin: 0 0 8px;
+}
+
+.card p {
+  margin: 0;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.5;
+}
+
+.contact-line {
+  color: rgba(255,255,255,0.78);
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .links a {
+    margin-left: 12px;
+  }
+ .links-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.link-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+}
+
+.link-list li {
+  margin: 10px 0;
+}
+
+a {
+  color: rgba(255,255,255,0.88);
+}
+
+a:hover {
+  color: white;
+}
+
+.muted {
+  color: rgba(255,255,255,0.7);
+}
+
+@media (max-width: 800px) {
+  .links-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.video {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+}
+
+.video iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  display: block;
+}
+
+@media (max-width: 800px) {
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
+}
 }
