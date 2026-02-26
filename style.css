@@ -60,6 +60,13 @@ body {
   text-align: center;
   padding: 64px 0;
 }
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* horizontally center */
+  justify-content: center;
+  text-align: center;
+}
 
 .hero-inner h1 {
   font-size: clamp(2.6rem, 6vw, 4rem);
@@ -161,16 +168,8 @@ h2 {
   color: rgba(255,255,255,0.78);
 }
 
-/* Responsive */
-@media (max-width: 800px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
-  .links a {
-    margin-left: 12px;
-  }
- .links-grid {
+/* Links section */
+.links-grid {
   grid-template-columns: repeat(3, 1fr);
 }
 
@@ -196,11 +195,7 @@ a:hover {
   color: rgba(255,255,255,0.7);
 }
 
-@media (max-width: 800px) {
-  .links-grid {
-    grid-template-columns: 1fr;
-  }
-}
+/* Video */
 .video-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -222,9 +217,84 @@ a:hover {
   display: block;
 }
 
+/* Makes the latest video section wider than the normal container */
+.video-wide {
+  width: min(1300px, 96%);
+  margin: 0 auto;
+}
+/* Icon links */
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: rgba(255,255,255,0.88);
+}
+
+.icon-link:hover {
+  color: white;
+}
+
+.icon-link img {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+/* Optional: subtle “lift” on hover for premium feel */
+.icon-link:hover img {
+  transform: translateY(-1px);
+  transition: transform 0.15s ease;
+}
+/* Icon row for platform links */
+.icon-row {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+/* Clickable icon button */
+.icon-btn {
+  width: 44px;
+  height: 44px;              /* good tap target size */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.03);
+  text-decoration: none;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.icon-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.06);
+}
+
+.icon-btn img {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+/* Responsive overrides */
 @media (max-width: 800px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .links a {
+    margin-left: 12px;
+  }
+
+  .links-grid {
+    grid-template-columns: 1fr;
+  }
+
   .video-grid {
     grid-template-columns: 1fr;
   }
-}
 }
