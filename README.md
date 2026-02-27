@@ -1,6 +1,6 @@
 # MK Website
 
-This repository contains the static marketing site for the MK brand. The
+This repository contains the website for MK. The
 primary goal of the current implementation is simplicity, performance, and
 maintainability. No frameworks or build tools are required; the site runs
 on plain HTML/CSS with an optional `main.js` for future enhancement.
