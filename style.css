@@ -1,7 +1,17 @@
+/*
+  Global reset / normalization rules. Applying `box-sizing: border-box`
+  everywhere simplifies width calculations by including padding/borders in
+  the element's total size; this avoids surprises when setting width/height
+  on nested elements.
+*/
 * {
   box-sizing: border-box;
 }
 
+/*
+  Opt-in smooth scroll native behavior for anchor navigation. It's subtle,
+  non-invasive, and degrades gracefully in browsers that don't support it.
+*/
 html {
   scroll-behavior: smooth;
 }
@@ -19,7 +29,13 @@ body {
   margin: 0 auto;
 }
 
-/* Top nav */
+/*
+  Top navigation bar uses `position: sticky` so it remains visible without
+  taking the overhead of `fixed` which would remove it from document flow.
+  The semi-transparent background with blur (backdrop-filter) gives a
+  modern 'frosted glass' effect and allows content to scroll under it.
+  A thin border reinforces separation from the page content.
+*/
 .topbar {
   position: sticky;
   top: 0;
@@ -280,6 +296,13 @@ a:hover {
   display: block;
 }
 
+/*
+  Responsive overrides apply only below the breakpoint. This section is
+  intentionally concise to avoid cascading specificity issues and makes
+  it clear that the mobile adjustments are grouped together. The 800px
+  threshold was picked because it aligns with the narrowest layout where
+  the three-column grid becomes impractical.
+*/
 /* Responsive overrides */
 @media (max-width: 800px) {
   .grid {

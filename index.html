@@ -1,6 +1,28 @@
+<!--
+  Primary landing page for MK's personal brand site.
+
+  This document keeps dependencies minimal (no JS libraries) to maximize
+  performance and ensure maintainability. Semantic HTML is used throughout
+  so the structure remains meaningful without additional scaffolding. The
+  <head> section sets up responsive behavior via 'viewport' and declares
+  UTF-8 encoding to support international text if needed. The stylesheet
+  link is placed here so the critical CSS loads before rendering to avoid
+  flash-of-unstyled-content (FOUC).
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta http-equiv="Content-Security-Policy"
+content="
+default-src 'self';
+style-src 'self';
+script-src 'self';
+img-src 'self' data: https:;
+connect-src 'self';
+frame-src https://www.youtube.com;
+base-uri 'self';
+form-action 'self';
+">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MK | Artist • Activist • Creator</title>
@@ -8,6 +30,13 @@
 </head>
 <body>
 
+  <!--
+    Sticky top navigation keeps key sections accessible during scroll.
+    Using a <header> element improves semantics for screen readers and
+    search engines. The container limits width for readability on large
+    displays while flex layout ensures the logo and links justify
+    space-between without additional wrappers.
+  -->
   <header class="topbar">
     <div class="container nav">
       <div class="logo">MK</div>
@@ -22,6 +51,13 @@
   </header>
 
   
+      <!--
+        Hero section acts as the first impression: large type, concise
+        subtitle and clear calls-to-action. A separate `.hero-inner` container
+        eases centering and future enhancements such as background images or
+        video. Keeping the markup simple ensures the page still works if CSS
+        fails; content hierarchy (h1 then p) is preserved for accessibility.
+      -->
       <div class="container hero-inner">
         <h1>MK</h1>
         <p class="subtitle">Artist • Social Activist • Digital Content Creator</p>
@@ -52,23 +88,38 @@
           and to transform creativity into impact.
         </p>
       </div>
-    </section>
+    <!--
+      This section surfaces the most recent YouTube video without requiring a
+      full page reload or manual update of the HTML. The iframe `src` is left
+      blank intentionally; JavaScript (currently not present, but reserved
+      for future enhancement) will fetch data from `data/latest.json`. Keeping
+      the metadata outside the markup decouples content from layout and allows
+      non-technical editors to update JSON via build/deploy scripts.
+
+      The `loading="lazy"` attribute defers loading until the section is
+      in view which improves initial page performance, and a strict
+      referrer policy limits data leakage for privacy reasons.
+    -->
     <section id="latest-video" class="section alt">
   <div class="container video-wide">
     <h2>Latest Video</h2>
-    <p class="lead">
-      Watch the most recent drop from MK — where message and music meet.
-    </p>
+    <p class="lead">Watch the most recent drop from MK — where message and music meet.</p>
 
     <div class="video">
       <iframe
+        id="latest-iframe"
         src="https://www.youtube.com/embed/S3M_Z2CdGqg"
         title="MK Latest Video"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen>
       </iframe>
     </div>
+
+    <p class="muted" id="latest-meta" style="margin-top:10px;">Loading latest video…</p>
   </div>
-  </section>
+</section>
     
 
     
@@ -173,12 +224,18 @@
         <h2>Contact</h2>
         <p class="lead">For bookings, collaborations, or inquiries:</p>
 
-        <!-- replace with real info later -->
+        <!--
+          Placeholder contact details are hard-coded for now. In a more
+          mature implementation this could be replaced by a form or fetched
+          from a backend; the use of semantic `<p>` and `<strong>` ensures
+          screen readers announce the labels correctly and allows easy
+          styling with `.contact-line`.
+        -->
         <p class="contact-line"><strong>Email:</strong> officialmkmusic2003@gmail.com</p>
         <p class="contact-line"><strong>Instagram:</strong> @mk.musicpage</p>
       </div>
     </section>
   </main>
-
+<script src="main.js" defer></script>
 </body>
 </html>

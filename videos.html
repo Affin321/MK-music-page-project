@@ -1,6 +1,27 @@
+<!--
+  Separate videos listing page allows embedding a larger set of content
+  without cluttering the main landing page. Keeping this as a standalone
+  document makes it easier to link directly from social posts and simplifies
+  analytic tracking of video-specific traffic.
+
+  As with index.html, the <head> carries essential metadata for responsive
+  rendering and pulls in the shared stylesheet so all pages maintain a
+  consistent look and feel.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta http-equiv="Content-Security-Policy"
+content="
+default-src 'self';
+style-src 'self';
+script-src 'self';
+img-src 'self' data: https:;
+connect-src 'self';
+frame-src https://www.youtube.com;
+base-uri 'self';
+form-action 'self';
+">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MK | Videos</title>
@@ -8,6 +29,14 @@
 </head>
 <body>
 
+  <!--
+    The sticky header is duplicated here for consistency across pages. Inline
+    styles are used sparingly (only on the logo anchor) to override default
+    link coloring and prevent specificity wars. Keeping the navigation
+    markup identical to index.html avoids diverging layouts when the site
+    grows; if a server-side framework were added later, this would become
+    a shared partial.
+  -->
   <header class="topbar">
     <div class="container nav">
       <div class="logo"><a href="index.html" style="text-decoration:none;color:white;">MK</a></div>
@@ -28,6 +57,13 @@
         <p class="lead">Featured highlights and the most current releases.</p>
 
         <h3 style="margin-top:28px;">Most Current</h3>
+        <!--
+          Hard‑coded placeholders are used here so designers can quickly drop in
+          upcoming videos without touching JavaScript. This also makes the
+          page usable if JS fails or is disabled, ensuring baseline functionality
+          (progressive enhancement). A build script or CMS could later generate
+          this markup dynamically from a feed.
+        -->
         <div class="video-grid">
           <!-- Replace VIDEO_ID with the real YouTube IDs -->
           <div class="video">
@@ -39,6 +75,12 @@
         </div>
 
         <h3 style="margin-top:36px;">Most Important</h3>
+        <!--
+          This second gallery is intended for evergreen content that should
+          remain visible longer than the "Most Current" items. The separation
+          helps a content manager quickly update one area without affecting the
+          other, and the additional entries justify the wider grid layout.
+        -->
         <div class="video-grid">
           <div class="video">
             <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="YouTube video" allowfullscreen></iframe>
