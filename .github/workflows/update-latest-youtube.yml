@@ -1,0 +1,45 @@
+name: Update latest YouTube JSON
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/30 * * * *"  # every 30 minutes
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-latest-youtube
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Update data/latest.json
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          YOUTUBE_UPLOADS_PLAYLIST_ID: ${{ secrets.YOUTUBE_UPLOADS_PLAYLIST_ID }}
+        run: node scripts/update-youtube-latest.mjs
+
+      - name: Commit + push if changed
+        run: |
+          if git diff --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+
+          git config user.name "mk-website-bot"
+          git config user.email "mk-website-bot@users.noreply.github.com"
+
+          git add data/latest.json
+          git commit -m "chore: update latest YouTube video"
+          git push
