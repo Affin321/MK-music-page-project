@@ -3,7 +3,7 @@ name: Update latest YouTube JSON
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/30 * * * *"  # every 30 minutes
+    - cron: "0 */2 * * *"
 
 permissions:
   contents: write

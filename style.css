@@ -304,6 +304,35 @@ a:hover {
   the three-column grid becomes impractical.
 */
 /* Responsive overrides */
+/* Intro split layout (desktop) */
+.intro-split {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.intro-copy {
+  flex: 1 1 55%;
+  min-width: 0;
+}
+
+.intro-media {
+  flex: 1 1 45%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.intro-media img {
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+}
 @media (max-width: 800px) {
   .grid {
     grid-template-columns: 1fr;
@@ -320,4 +349,20 @@ a:hover {
   .video-grid {
     grid-template-columns: 1fr;
   }
+  /* Intro split layout (mobile) */
+.intro-split {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.intro-media {
+  width: 100%;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.intro-media img {
+  max-width: 520px;
+}
+  
 }
